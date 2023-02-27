@@ -11,7 +11,10 @@ import utilStyles from "../styles/utils.module.css";
 //(tiene que estar haciendo requests al server a cada rato)
 
 //Using Static Generation (getStaticProps())
+//server side-rendering getServerSideProps
 import { getSortedPostsData } from "../lib/posts";
+import Link from "next/link";
+import Date from "../components/date";
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
@@ -21,6 +24,34 @@ export async function getStaticProps() {
     },
   };
 }
+
+/*
+export async function getServerSideProps(context) {
+  return {
+    props: {
+      // props for your component
+    },
+  };
+}
+*/
+
+//client side-rendering: 1)genera estaticamente las partes que no necesitan data del server
+//2)cuando la pagina se carga, llama a la data externa usando javascript y puebla el resto de la pagina
+//client side rendering es ideal para dashboard admins
+
+//SWR hook: used to fetch data
+//ejemplo SWR hook
+/*
+import useSWR from 'swr';
+
+function Profile() {
+  const { data, error } = useSWR('/api/user', fetch);
+
+  if (error) return <div>failed to load</div>;
+  if (!data) return <div>loading...</div>;
+  return <div>hello {data.name}!</div>;
+}
+*/
 
 export default function Home({ allPostsData }) {
   return (
@@ -40,11 +71,11 @@ export default function Home({ allPostsData }) {
         <ul className={utilStyles.list}>
           {allPostsData.map(({ id, date, title }) => (
             <li className={utilStyles.listItem} key={id}>
-              {title}
+              <Link href={`/posts/${id}`}>{title}</Link>
               <br />
-              {id}
-              <br />
-              {date}
+              <small className={utilStyles.lightText}>
+                <Date dateString={date} />
+              </small>
             </li>
           ))}
         </ul>
