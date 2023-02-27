@@ -18,8 +18,13 @@ pages/posts/first-post.js se renderiza en la ruta /posts/first-post
 
 # Links
 
-el tag `<a>` sirve para linkear a paginas internan
-el componente link sirve para
+el tag `<a></a>` sirve para linkear a paginas externas
+el componente `link` sirve para linkear paginas internas
+
+```
+import Link from "next/link";
+<Link href="/">Back to home</Link>
+```
 
 ## Rutas dinamcas
 
