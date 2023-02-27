@@ -48,7 +48,7 @@ En nextjs se usa el componente Image para introducir imagenes en vez de `<img>` 
   />
 ```
 
-# Editar el <head>
+# Editar el head
 
 ```
 import Head from 'next/head';
@@ -158,7 +158,7 @@ When the page loads, fetch external data from the client using JavaScript and po
 Hook ideal para fetchear data al client
 Mas info: https://swr.vercel.app
 
-# Rutas dinamcas
+# Rutas dinamicas
 
 [dynamic route].js
 las rutas dinamicas van entre corchetes
